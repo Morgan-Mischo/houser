@@ -15,6 +15,9 @@ massive(CONNECTION_STRING)
 .catch(err => console.log(err));
 
 app.use(express.json()); 
+
 app.get('/api/houses', ctrl.getHouses); 
+
+app.post('/api/houses', ctrl.addHouse);
 
 app.listen(SERVER_PORT, ()=> console.log(`Listening on port ${SERVER_PORT}`))

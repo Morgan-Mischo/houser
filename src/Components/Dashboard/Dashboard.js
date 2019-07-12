@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import House from '../House/House'; 
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Wizard from '../Wizard/Wizard'; 
 
 class Dashboard extends Component {
   constructor() {
@@ -25,12 +26,22 @@ class Dashboard extends Component {
     let { houses } = this.state; 
     return <div> Dashboard  {houses.map(house => {
       return (
-        < House />
+        <House
+        address={house.address}
+        name={house.name}
+        city={house.city}
+        state={house.state}
+        zipcode={house.zipcode}
+        />
       )
     })}
+
         <Link to='/wizard'>
           <button>Add New Property</button>
+          
         </Link>
+        <Wizard didMount={this.componentDidMount}/>
+       
     </div>;
   }
 }

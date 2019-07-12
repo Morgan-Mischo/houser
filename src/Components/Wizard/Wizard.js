@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom'; 
+import {Link} from 'react-router-dom';
+import Dashboard from '../Dashboard/Dashboard'; 
+import axios from "axios";
 
 class Wizard extends Component {
   constructor() {
@@ -19,11 +21,20 @@ class Wizard extends Component {
       [name] : value
     }); 
   }; 
+
+  buttonPress = () => {
+    const {name, address, city, state, zipcode} = this.state
+    axios.post('/api/houses', { name, address, city, state, zipcode })
+    .then(res => {
+      this.props.didMount()
+    })
+  }
   render() {
     const { name, address, city, state, zipcode } = this.state; 
     return <div> Wizard 
       <Link to="/">
         <button>Cancel</button>
+        <button onClick={this.buttonPress} > Add </button>
       </Link>
       <input
       name='name'

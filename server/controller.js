@@ -9,5 +9,13 @@ module.exports = {
             res.status(500).send({ errorMessage: 'Something went wrong' }); 
             console.log(err)
         })
+    }, 
+
+    addHouse: (req, res) => {
+        const dbInstance = req.app.get('db')
+        const { name, address, city, state, zipcode } = req.body
+        dbInstance.addHouse([name, address, city, state, zipcode])
+        .then( () => res.sendStatus(200))
+        console.log('all good')
     }
 }
